@@ -1,0 +1,114 @@
+.register-container{
+    background-color: azure;
+    height: 10vh;
+    width: 10vw;
+    position: fixed;
+    z-index: 999;
+    top: 47%;
+    margin-left: 43%;
+    right: 0;
+    left: 0;
+}
+.reg-container {
+    padding: 20px;
+      width:500px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+      border:1px solid #ccc;
+      border-radius:10px;
+      background:white;
+  -webkit-box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
+  -moz-box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
+  box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
+  }
+  .reg-container>h1{
+    /* font-family: sans-serif; */
+    font-size:x-large;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4%;
+  }
+/* Full-width input fields */
+.reg-container > input[type=text],.reg-container > input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f7f7f7;
+	/* font-family: Montserrat,Arial, Helvetica, sans-serif; */
+}
+.reg-container>select {
+  width: 18%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f7f7f7;
+	/* font-family: Montserrat,Arial, Helvetica, sans-serif; */
+}
+
+.reg-container > input[type=phone] {
+  width: 81%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f7f7f7;
+}
+
+.reg-container>input[type=text]:focus, input[type=password]:focus, input[type=phone]:focus, select:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+
+
+/* Set a style for all buttons */
+.clearfix>button {
+  background-color:  #5162cef1;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+	font-size:16px;
+	/* font-family: Montserrat,Arial, Helvetica, sans-serif; */
+	border-radius:10px;
+}
+
+.clearfix>button:hover {
+  opacity:1;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Style the input fields with errors */
+.reg-container input[type=text].error,
+.reg-container input[type=password].error,
+.reg-container select.error,
+.reg-container input[type=phone].error {
+  border: 1px solid red;
+  background-color: #ffe0e0; /* Light red background for input fields with errors */
+}
+
+
+/* Change styles for signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .signupbtn {
+     width: 100%;
+  }
+}
+
+
+

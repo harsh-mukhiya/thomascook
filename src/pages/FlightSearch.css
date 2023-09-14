@@ -1,0 +1,19 @@
+.search-background {
+    padding: 50px 0;
+    z-index: -2;
+    min-height: 100vh;
+    background-color: #bacae4;
+    /*
+    position: relative; 
+    background-image: url('https://media.cntraveler.com/photos/62ea817eaf14e65bfedc7cec/16:9/w_1920,c_limit/Long%20Haul%20Flight-2022_00-Lede.jpg');
+    background-size: cover; 
+    background-position: center center;
+    width: 100%; 
+    */
+    
+    /* Create a dark overlay using a pseudo-element */
+    
+}
+
+
+

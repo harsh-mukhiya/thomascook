@@ -1,0 +1,103 @@
+.show {
+  background-color: azure;
+  height: fit-content;
+  width: fit-content;
+  position: fixed;
+  z-index: 999;
+  top: 30%;
+  margin-left: 40%;
+  right: 0;
+  left: 0;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.card {
+  width: 300px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  border-top: 4px solid #5162cef1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.login-input {
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #ccc;
+  color: #333;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.login-button {
+  padding: 10px 20px;
+  background-color: #5162cef1;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.register-button {
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.error-message {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.error-text {
+  color: red;
+  font-size: 14px;
+  margin: 0;
+  padding: 5px 0; /* Add padding to provide spacing around the error text */
+  border: 1px solid #f44336; /* Add a red border around the error message */
+  background-color: #ffebee; /* Add a light red background color to the error message */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for emphasis */
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Adjust the margin-top to provide spacing between the spinner and other elements */
+  margin-bottom: 7px;
+}
+
+.spinner-icon {
+  color: #5162cef1;
+  font-size: 24px; /* Adjust the size of the spinner icon */
+  margin-right: 5px; /* Add some spacing between the icon and the "Logging In..." text */
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

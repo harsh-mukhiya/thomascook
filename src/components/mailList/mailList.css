@@ -1,0 +1,20 @@
+.mail{
+    width: 100%;
+    background-color: #003580;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 50px;
+  }
+  
+  .mailInputContainer>input{
+    width: 400px;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    margin-right: 10px;
+    border-radius: 5px;
+  }
+  
