@@ -73,7 +73,7 @@ const MailList = () => {
 
   return (
     <div>
-      <section className="relative z-20 overflow-hidden bg-[#f3f4ff] pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
+      <section className="relative mt-6 z-20 overflow-hidden bg-[#f3f4ff] pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
         <div className="container">
           <div className="mx-auto mb-[60px] max-w-[620px] text-center lg:mb-20">
             <span className="mb-2 block text-lg font-semibold text-primary">

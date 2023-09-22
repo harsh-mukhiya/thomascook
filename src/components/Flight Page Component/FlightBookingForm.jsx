@@ -1,9 +1,25 @@
 import React, { useState } from "react";
 import Accordion from "@mui/material/Accordion";
+import axios from "axios";
 import "./FlightBookingForm.css";
-const FlightBookingForm = () => {
-  const [tripType, setTripType] = useState("One Way");
 
+import { citiesList } from "../../static/citiesList";
+const FlightBookingForm = ({flightData, setFlightsData}) => {
+  const [tripType, setTripType] = useState("One Way");
+  const [error, setError] = useState();
+  const [data, setData] = useState({
+    
+    departureCity: "",
+    arrivalCity: "",
+    date: "",
+
+  });
+ 
+  const { departureCity, arrivalCity, date } = data;
+  const onChangeHandler = (event) => {
+    setError();
+    setData({ ...data, [event.target.name]: event.target.value });
+  };
   const onOptionChange = (e) => {
     setTripType(e.target.value);
   };
@@ -43,6 +59,30 @@ const FlightBookingForm = () => {
     if (infantCount < 0) infantCount = 0;
     setInfantCount(infantCount);
   }
+  function submitCheck(e) {
+    e.preventDefault();
+
+    if (departureCity == "") setError(`Departure is required`);
+    else if (arrivalCity == "") setError(`Arrival is required`);
+ 
+    else if (date == "") setError(`Date is required`);
+    else {
+      setError();
+      submitAction(e);
+    }
+  }
+  const submitAction = async (e) => {
+    e.preventDefault();
+    
+    const apiUrl = `http://localhost:5147/api/PublicData/filteredFlightDetails?booking_type=${tripType}&departure_city=${data.departureCity}&arrival_city=${data.arrivalCity}&date=${data.date}`;
+    try {
+      const result = await axios.get(apiUrl);
+      console.log(result);
+      setFlightsData(result.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <>
       <div className="flight-form">
@@ -85,24 +125,46 @@ const FlightBookingForm = () => {
           </div>
         </div>
         {tripType == "One Way" && (
-          <form action="" className="flight-input-form">
+          <form className="flight-input-form" onSubmit={submitCheck}>
             <div>
               {" "}
               <i class="fa fa-plane" aria-hidden="true"></i>{" "}
-              <input type="text" placeholder="Departure"></input>
+              <select name="departureCity" value={departureCity} onChange={onChangeHandler}>
+                <option value="" disabled selected>Departure</option>
+                {citiesList.map((city, index) => (
+                <option key={index} value={city.name}>
+                  {`${city.name} (${city.code})`}
+                </option>
+              ))}
+              </select>
             </div>
 
             <div>
               {" "}
               <i class="fas fa-map-marked-alt"></i>{" "}
-              <input type="text" placeholder="Arrival"></input>
+              <select name="arrivalCity" value={arrivalCity} onChange={onChangeHandler}>
+                <option value="" disabled selected>Arrival</option>
+                {citiesList.map((city, index) => (
+                <option key={index} value={city.name}>
+                  {`${city.name} (${city.code})`}
+                </option>
+              ))}
+              </select>
             </div>
             <div>
               {" "}
               <i class="fa fa-calendar" aria-hidden="true"></i>{" "}
-              <input placeholder="Depart On" type="text" onChange={(e) => console.log(e.target.value)}
-        onFocus={(e) => (e.target.type = "date")}
-        onBlur={(e) => (e.target.type = "text")}  id="date"></input>
+              <input
+                placeholder="Depart On"
+                name="date"
+                type="text"
+                onChange={onChangeHandler}
+                onFocus={(e) => (e.target.type = "date")}
+                onBlur={(e) => (e.target.type = "text")}
+                id="date"
+                value={date}
+                
+              ></input>
             </div>
             <div onClick={toggleAccordian}>
               {" "}
@@ -240,8 +302,8 @@ const FlightBookingForm = () => {
                 </div>
               </form>
             )}
-
-            <button>
+             <div style={{ color: "red" }}>{error}</div>
+            <button type="submit">
               <span>Find Flights</span>
               <svg
                 viewBox="-5 -5 110 110"
@@ -258,22 +320,42 @@ const FlightBookingForm = () => {
             <div>
               {" "}
               <i class="fa fa-plane" aria-hidden="true"></i>{" "}
-              <input type="text" placeholder="Departure"></input>
+              <select name="departureCity" value={departureCity} onChange={onChangeHandler}>
+                <option value="" disabled selected>Departure</option>
+                {citiesList.map((city, index) => (
+                <option key={index} value={city.name}>
+                  {`${city.name} (${city.code})`}
+                </option>
+              ))}
+              </select>
             </div>
 
             <div>
               {" "}
               <i class="fas fa-map-marked-alt"></i>{" "}
-              <input type="text" placeholder="Arrival"></input>
+                <select name="arrivalCity" value={arrivalCity} onChange={onChangeHandler}>
+                  <option value="" disabled selected>Arrival</option>
+                  {citiesList.map((city, index) => (
+                  <option key={index} value={city.name}>
+                    {`${city.name} (${city.code})`}
+                  </option>
+                ))}
+                </select>
             </div>
             <div>
               {" "}
               <i class="fa fa-calendar" aria-hidden="true"></i>{" "}
-              <input placeholder="Depart on" type="text" onChange={(e) => console.log(e.target.value)}
-        onFocus={(e) => (e.target.type = "date")}
-        onBlur={(e) => (e.target.type = "text")}  id="date"></input>
+              <input
+                placeholder="Depart on"
+                type="text"
+                onChange={onChangeHandler}
+                value={date}
+                onFocus={(e) => (e.target.type = "date")}
+                onBlur={(e) => (e.target.type = "text")}
+                id="date"
+              ></input>
             </div>
-           
+
             <div onClick={toggleAccordian}>
               {" "}
               <i class="fa-solid fa-people-group"></i>{" "}
@@ -286,9 +368,14 @@ const FlightBookingForm = () => {
             <div>
               {" "}
               <i class="fa fa-calendar" aria-hidden="true"></i>{" "}
-              <input placeholder="Return on" type="text" onChange={(e) => console.log(e.target.value)}
-        onFocus={(e) => (e.target.type = "date")}
-        onBlur={(e) => (e.target.type = "text")}  id="date"></input>
+              <input
+                placeholder="Return on"
+                type="text"
+                onChange={(e) => console.log(e.target.value)}
+                onFocus={(e) => (e.target.type = "date")}
+                onBlur={(e) => (e.target.type = "text")}
+                id="date"
+              ></input>
             </div>
             {openAccordian && (
               <form className="flight-accordian">
@@ -417,8 +504,8 @@ const FlightBookingForm = () => {
                 </div>
               </form>
             )}
-
-            <button>
+           <div style={{ color: "red" }}>{error}</div>
+            <button button type="submit">
               <span>Find Flights</span>
               <svg
                 viewBox="-5 -5 110 110"
@@ -430,7 +517,6 @@ const FlightBookingForm = () => {
             </button>
           </form>
         )}
-        
       </div>
     </>
   );

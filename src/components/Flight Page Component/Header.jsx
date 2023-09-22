@@ -1,7 +1,10 @@
-import React from "react";
+import React,{useState} from "react";
 import "./Header.css";
 import FlightBookingForm from "./FlightBookingForm";
+import SearchResult from "../Flight Search Components/SearchResult";
 const Header = () => {
+  const [flightsData,setFlightsData] = useState([]);
+  console.log(flightsData);
   return (
     <>
       <div className="flight-header-container">
@@ -17,9 +20,16 @@ const Header = () => {
           </p>
         </div>
         <div className="flight-form-container">
-          <FlightBookingForm></FlightBookingForm>
+          <FlightBookingForm flightsData={flightsData} setFlightsData={setFlightsData}></FlightBookingForm>
         </div>
       </div>
+      <div className="flightsData">
+      {flightsData.length !== 0 ? (
+          flightsData.map((data, index) => <SearchResult key={index} data={data} />)
+        ) : (
+          <h6 style={{ textAlign: "center", fontFamily: "Roboto", fontWeight: "700" }}>No flights on the given date.</h6>
+        )}
+        </div>
       <div className="top-destination-conatainer">
         <div className="top-dest-section">
           <div class="dd_heading">

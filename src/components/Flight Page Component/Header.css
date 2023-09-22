@@ -304,3 +304,8 @@
   .flight-conclusion>p{
     font-family: "Montserrat", sans-serif;  
   }
+.flightsData{
+  width: 80%;
+  margin: auto;
+  margin-top: 3%;
+}

@@ -1,5 +1,5 @@
 import "./hoteldetail.css";
-import React from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleArrowLeft,
@@ -8,10 +8,27 @@ import {
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import axios from 'axios';
 
 const HotelDetails = () => {
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
+
+  const apiUrl = 'http://localhost:5147/api/PublicData/specificHotelDetails?hotelId=4';
+  const [hotelData, setHotelData] = useState("");
+  
+  useEffect(() => {
+  axios.get(apiUrl)
+  .then(function (response) {
+    const data = response.data;
+    setHotelData(data);
+    console.log('Data:', data);
+    console.log('stored', hotelData.hotelId);
+  })
+  .catch(function (error) {
+    console.error('Error:', error);
+  });
+},[])
 
   const photos = [
     {
@@ -89,16 +106,16 @@ const HotelDetails = () => {
           >
             Book Now!
           </button>
-          <h1 className="text-4xl font-bold">Tower Street Apartments</h1>
+          <h1 className="text-4xl font-bold">{hotelData.hotelName}</h1>
           <div className="text-lg font-bold">
             <FontAwesomeIcon icon={faLocationDot} />
-            <span> Elton St 125 New york</span>
+            <span> {hotelData.city}</span>
           </div>
           <span className="hotelDistance text-lg">
-            Excellent location – 500m from center
+            Excellent location – 500m from Connaught Place
           </span>
           <span className="hotelPriceHighlight text-lg">
-            Book a stay over $114 at this property and get a free airport taxi
+            Book a stay over ₹{hotelData.normalRoomPrice} at this property and get a free airport taxi
           </span>
           <div className="hotelImages">
             {photos.map((photo, i) => (
@@ -128,27 +145,19 @@ const HotelDetails = () => {
               </blockquote>
 
               <p className="mb-3 text-gray-500">
-                Located a 5-minute walk from St. Florian's Gate in Krakow, Tower
-                Street Apartments has accommodations with air conditioning and
-                free WiFi. The units come with hardwood floors and feature a
-                fully equipped kitchenette with a microwave, a flat-screen TV,
-                and a private bathroom with shower and a hairdryer. A fridge is
-                also offered, as well as an electric tea pot and a coffee
-                machine. Popular points of interest near the apartment include
-                Cloth Hall, Main Market Square and Town Hall Tower. The nearest
-                airport is John Paul II International Kraków–Balice, 16.1 km
-                from Tower Street Apartments, and the property offers a paid
-                airport shuttle service.
+              Nestled in the heart of Delhi, our hotel is a sanctuary of luxury and tranquility amidst the vibrant energy of this historic city. Whether you're here for business or leisure, our prime location ensures that you're just moments away from the city's most iconic landmarks, cultural attractions, and business districts.
               </p>
             </div>
             <div className="hotelDetailsPrice">
-              <h1>Perfect for a 9-night stay!</h1>
+              <h1>Perfect for a weekend stay!</h1>
               <span>
-                Located in the real heart of Krakow, this property has an
-                excellent location score of 9.8!
+              {hotelData.hotelDescription} 
               </span>
               <h2>
-                <b>$945</b> (9 nights)
+                <b>₹{hotelData.normalRoomPrice}</b> (2 nights)
+              </h2>
+              <h2>
+                <b>₹{hotelData.deluxeRoomPrice}</b> (2 nights Deluxe Room)
               </h2>
               <button
                 type="button"

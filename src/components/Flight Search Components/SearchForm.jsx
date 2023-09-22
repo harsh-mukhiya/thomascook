@@ -95,7 +95,7 @@ function SearchForm({ setFlights }) {
     const departureCity = data.departureCity;
     const arrivalCity = data.arrivalCity;
     const date = data.departDate;
-
+   
     // Construct the URL with the parameters
     const apiUrl = `http://localhost:5147/api/PublicData/filteredFlightDetails?booking_type=${bookingType}&departure_city=${departureCity}&arrival_city=${arrivalCity}&date=${date}`;
     try {

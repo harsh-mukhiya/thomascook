@@ -14,4 +14,15 @@
       opacity: 100;
     }
   }
-  
+.search-hotels{
+  width: 70%;
+  margin: auto;
+  margin-top: 4%;
+}
+.hotels-data{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 80%;
+  margin: auto;
+  margin-top: 5%;
+}
